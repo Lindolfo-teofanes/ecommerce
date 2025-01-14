@@ -55,28 +55,23 @@ public class PedidoService {
 
     public Pedido atualizarStatus(UUID id, String status) throws ComprasException {
         try {
-            // Validação do status
-            if (!List.of("Criado", "Pendente", "Concluído", "Cancelado").contains(status)) {
+            if (!List.of("Criado", "Processando", "Concluído").contains(status)) {
                 throw new ComprasException(ComprasError.CP0005, "Status inválido: " + status);
             }
 
-            // Busca do pedido
             Pedido pedido = pedidoRepository.findById(id)
                     .orElseThrow(() -> new ComprasException(ComprasError.CP0006, "Pedido não encontrado para o ID: " + id));
 
 
-            // Atualiza o status do pedido
             pedido.setStatus(status);
             Pedido atualizado = pedidoRepository.save(pedido);
 
-            // Cria a mensagem para o RabbitMQ
             PedidoMessage message = PedidoMessage.builder()
                     .id(pedido.getId())
                     .nome(pedido.getNomeCliente())
                     .status(status)
                     .build();
 
-            // Envia a mensagem ao RabbitMQ
             try {
                 rabbitMQSender.sendMessage(message);
             } catch (Exception ex) {
@@ -85,10 +80,8 @@ public class PedidoService {
 
             return atualizado;
         } catch (ComprasException e) {
-            // Exceções já encapsuladas
             throw e;
         } catch (Exception e) {
-            // Exceções genéricas
             throw new ComprasException(e, ComprasError.CP0004, "Erro inesperado ao atualizar o status do pedido.");
         }
     }
