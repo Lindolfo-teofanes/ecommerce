@@ -1,10 +1,10 @@
 package com.az.backend.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ProdutoServiceTest {
 
-//    @org.junit.jupiter.api.Test
-//    void buscarTodos() {
-//    }
+    @Test
+    void buscarTodos() {
+    }
 }

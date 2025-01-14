@@ -1,6 +1,7 @@
 package com.az.backend.controllers;
 
 import com.az.backend.services.CepService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +16,8 @@ public class CepController {
     }
 
     @GetMapping("/{cep}")
-    public String buscarCep(@PathVariable String cep) {
-        return cepService.buscarEnderecoPorCep(cep);
+    public ResponseEntity<String> buscarCep(@PathVariable String cep) {
+        return ResponseEntity.ok(cepService.buscarEnderecoPorCep(cep));
     }
 
 }

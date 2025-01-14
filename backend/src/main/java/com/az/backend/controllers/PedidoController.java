@@ -3,6 +3,7 @@ package com.az.backend.controllers;
 import com.az.backend.dto.PedidoRequest;
 import com.az.backend.model.Pedido;
 import com.az.backend.services.PedidoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,18 +23,18 @@ public class PedidoController {
 
 
     @PostMapping
-    public Pedido criarPedido(@RequestBody PedidoRequest pedido) {
-        return pedidoService.criarPedido(pedido);
+    public ResponseEntity<Pedido> criarPedido(@RequestBody PedidoRequest pedido) {
+        return ResponseEntity.ok(pedidoService.criarPedido(pedido));
     }
 
     @GetMapping
-    public List<Pedido> listarPedidos() {
-        return pedidoService.listarPedidos();
+    public ResponseEntity<List<Pedido>> listarPedidos() {
+        return ResponseEntity.ok(pedidoService.listarPedidos());
     }
 
     @PatchMapping("/{id}")
-    public Pedido atualizarStatus(@PathVariable UUID id, @RequestParam String status) {
-        return pedidoService.atualizarStatus(id, status);
+    public ResponseEntity<Pedido> atualizarStatus(@PathVariable UUID id, @RequestParam String status) {
+        return ResponseEntity.ok(pedidoService.atualizarStatus(id, status));
     }
 
 }

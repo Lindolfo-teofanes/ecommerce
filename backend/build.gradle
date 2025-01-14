@@ -34,6 +34,7 @@ dependencies {
 	implementation 'com.google.code.gson:gson'
 	implementation group: 'org.json', name: 'json', version: '20250107'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+	implementation 'org.apache.commons:commons-lang3:3.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'

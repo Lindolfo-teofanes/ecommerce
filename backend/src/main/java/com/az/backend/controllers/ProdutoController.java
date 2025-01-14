@@ -2,6 +2,7 @@ package com.az.backend.controllers;
 
 import com.az.backend.model.Produto;
 import com.az.backend.services.ProdutoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listarProdutos(){
-        return produtoService.buscarTodos();
+    public ResponseEntity<List<Produto>> listarProdutos(){
+        return ResponseEntity.ok(produtoService.buscarTodos());
     }
 }
